@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Provoke Traders | Trading Institute</title>
+  <meta name="description"
+    content="Provoke Traders - Premium trading institute offering professional trading strategies, risk management and market psychology." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlack: '#050608',
+            brandDark: '#050608',
+            brandSoftBlack: '#111827',
+            brandGray: '#d4d4d8',
+            brandMuted: '#9ca3af',
+            brandAccent: '#f4f4f5'
+          },
+          fontFamily: {
+            sans: ['system-ui', 'ui-sans-serif', 'Inter', 'sans-serif']
+          },
+          boxShadow: {
+            soft: '0 22px 60px rgba(0,0,0,0.65)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .fade-section {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    }
+
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .parallax-layer {
+      transform: translateY(0);
+      transition: transform 0.12s ease-out;
+      will-change: transform;
+    }
+  </style>
+</head>
+
+<body class="bg-brandBlack text-white font-sans antialiased">
+  <!-- Background / parallax layer -->
+  <div id="parallaxBg"
+    class="parallax-layer fixed inset-0 -z-10 bg-gradient-to-b from-black via-brandSoftBlack to-black opacity-90">
+    <div
+      class="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08)_0,_transparent_55%),radial-gradient(circle_at_bottom,_rgba(15,23,42,0.9)_0,_transparent_60%)]">
+    </div>
+    <!-- Subtle chart lines -->
+    <div class="absolute inset-0 opacity-25">
+      <div class="h-full w-full bg-[linear-gradient(to_right,rgba(148,163,184,0.15)_1px,transparent_1px),linear-gradient(to_top,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-[size:80px_80px]">
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Wrapper -->
+  <div class="relative min-h-screen">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-30 border-b border-white/10 bg-black/70 backdrop-blur">
+      <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <!-- Brand -->
+        <a href="#hero" class="flex items-center gap-3 group">
+          <div
+            class="h-10 w-10 rounded-full overflow-hidden border border-white/40 bg-white shadow-md shadow-black/50 flex items-center justify-center">
+            <img src="images/provoke-traders-logo.png.jpg" alt="Provoke Traders Logo"
+              class="h-full w-full object-cover" />
+          </div>
+          <div class="flex flex-col leading-tight">
+            <span
+              class="text-sm font-semibold tracking-[0.18em] uppercase text-white group-hover:text-brandGray transition-colors">Provoke
+              Traders</span>
+            <span class="text-[10px] text-brandMuted tracking-[0.25em] uppercase">Create · Invest · Generate</span>
+          </div>
+        </a>
+
+        <!-- Nav links -->
+        <div class="hidden md:flex items-center gap-8 text-xs tracking-wide uppercase">
+          <a href="#hero" class="text-brandGray hover:text-white transition-colors">Home</a>
+          <a href="#courses" class="text-brandGray hover:text-white transition-colors">Courses</a>
+          <a href="#benefits" class="text-brandGray hover:text-white transition-colors">Benefits</a>
+          <a href="#success" class="text-brandGray hover:text-white transition-colors">Success</a>
+          <a href="#contact" class="text-brandGray hover:text-white transition-colors">Contact</a>
+        </div>
+
+        <!-- CTA + Mobile menu -->
+        <div class="flex items-center gap-3">
+          <a href="#courses"
+            class="hidden sm:inline-flex items-center justify-center rounded-full border border-white/30 bg-white/5 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-white hover:bg-white hover:text-black transition-colors">
+            Join Now
+          </a>
+          <button id="menuToggle"
+            class="md:hidden inline-flex items-center justify-center rounded-full border border-white/25 h-9 w-9 text-brandGray hover:bg-white/5 transition-colors">
+            <span class="sr-only">Toggle navigation</span>
+            <svg id="menuIconOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="menuIconClose" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile dropdown -->
+      <div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-black/80 backdrop-blur">
+        <div class="max-w-6xl mx-auto px-4 py-3 space-y-2 text-sm">
+          <a href="#hero" class="block px-2 py-2 rounded-md text-brandGray hover:text-white hover:bg-white/5">Home</a>
+          <a href="#courses"
+            class="block px-2 py-2 rounded-md text-brandGray hover:text-white hover:bg-white/5">Courses</a>
+          <a href="#benefits"
+            class="block px-2 py-2 rounded-md text-brandGray hover:text-white hover:bg-white/5">Benefits</a>
+          <a href="#success"
+            class="block px-2 py-2 rounded-md text-brandGray hover:text-white hover:bg-white/5">Success</a>
+          <a href="#contact"
+            class="block px-2 py-2 rounded-md text-brandGray hover:text-white hover:bg-white/5">Contact</a>
+          <a href="#courses"
+            class="mt-2 inline-flex w-full items-center justify-center rounded-full border border-white/40 bg-white/5 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-white hover:bg-white hover:text-black transition-colors">
+            Start Learning
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <!-- Hero Section -->
+      <section id="hero"
+        class="min-h-[90vh] flex items-center pt-10 sm:pt-16 fade-section relative overflow-hidden">
+        <div class="grid lg:grid-cols-[1.25fr_minmax(0,1fr)] gap-10 lg:gap-14 items-center w-full">
+          <!-- Left: text -->
+          <div class="space-y-7 relative z-10">
+            <p
+              class="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.28em] uppercase text-brandMuted bg-white/5 border border-white/10 px-3 py-1 rounded-full w-fit">
+              <span class="w-1.5 h-1.5 rounded-full bg-brandGray"></span>
+              Premium Trading Institute
+            </p>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-tight">
+              Master the Markets with
+              <span class="block mt-1 text-brandGray">Provoke Traders</span>
+            </h1>
+            <p class="text-sm sm:text-base text-brandMuted max-w-xl leading-relaxed">
+              Learn professional trading strategies, risk management, and market psychology from
+              experienced traders. A structured path from beginner to consistently disciplined trader.
+            </p>
+
+            <!-- Hero CTAs -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
+              <a href="#courses"
+                class="inline-flex items-center justify-center rounded-full border border-white bg-white px-6 py-3 text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase text-black shadow-soft hover:bg-transparent hover:text-white transition-colors">
+                Join Now
+              </a>
+              <a href="#courses"
+                class="inline-flex items-center justify-center rounded-full border border-white/25 px-6 py-3 text-xs sm:text-sm font-medium tracking-[0.18em] uppercase text-brandGray hover:bg-white/5 hover:text-white transition-colors">
+                Start Learning
+              </a>
+            </div>
+
+            <!-- Hero meta -->
+            <div class="flex flex-wrap gap-6 pt-5 text-[11px] text-brandMuted">
+              <div class="flex items-center gap-3">
+                <div class="h-7 w-7 rounded-full border border-white/25 flex items-center justify-center text-[10px]">
+                  FX
+                </div>
+                <div>
+                  <p class="font-medium text-brandGray">Multi-asset coverage</p>
+                  <p>Indices, equities, crypto & forex</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="h-7 w-7 rounded-full border border-white/25 flex items-center justify-center text-[10px]">
+                  RM
+                </div>
+                <div>
+                  <p class="font-medium text-brandGray">Risk-first approach</p>
+                  <p>Position sizing & risk controls</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: trading visuals -->
+          <div class="relative">
+            <div
+              class="absolute -inset-8 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08)_0,_transparent_55%)] blur-3xl opacity-90">
+            </div>
+            <div
+              class="relative rounded-3xl border border-white/15 bg-black/60 shadow-soft p-4 sm:p-6 flex flex-col gap-4 backdrop-blur">
+              <!-- Top bar -->
+              <div class="flex items-center justify-between text-[10px] text-brandMuted">
+                <div class="flex items-center gap-1.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-red-400/80"></span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-amber-300/80"></span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400/80"></span>
+                </div>
+                <p>Live Market Overview</p>
+              </div>
+
+              <!-- Mock chart -->
+              <div class="mt-1 rounded-2xl border border-white/10 bg-black/60 p-3">
+                <div class="flex items-center justify-between text-[10px] text-brandMuted mb-2">
+                  <p class="uppercase tracking-[0.18em] text-brandGray">Index Tracker</p>
+                  <p class="font-medium text-emerald-300">+1.24%</p>
+                </div>
+                <div
+                  class="h-28 rounded-lg bg-[radial-gradient(circle_at_0_100%,rgba(249,250,251,0.6)_0,transparent_55%),radial-gradient(circle_at_100%_0,rgba(249,250,251,0.4)_0,transparent_55%)] opacity-80">
+                </div>
+              </div>
+
+              <!-- Stats row -->
+              <div class="grid grid-cols-3 gap-2 text-[10px] text-brandMuted">
+                <div class="rounded-xl border border-white/10 bg-black/60 p-2.5">
+                  <p class="uppercase tracking-[0.16em] text-brandGray">Win Rate</p>
+                  <p class="mt-1 text-sm font-semibold text-emerald-300">64%</p>
+                  <p class="mt-0.5 text-[9px]">After risk filters</p>
+                </div>
+                <div class="rounded-xl border border-white/10 bg-black/60 p-2.5">
+                  <p class="uppercase tracking-[0.16em] text-brandGray">R:R</p>
+                  <p class="mt-1 text-sm font-semibold text-brandGray">1 : 2.3</p>
+                  <p class="mt-0.5 text-[9px]">Average payoff</p>
+                </div>
+                <div class="rounded-xl border border-white/10 bg-black/60 p-2.5">
+                  <p class="uppercase tracking-[0.16em] text-brandGray">Risk</p>
+                  <p class="mt-1 text-sm font-semibold text-amber-300">0.5%</p>
+                  <p class="mt-0.5 text-[9px]">Per trade model</p>
+                </div>
+              </div>
+
+              <p class="mt-1 text-[9px] text-brandMuted">
+                For educational purposes only. Trading involves risk to capital. Learn to manage risk
+                before seeking returns.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Courses Section -->
+      <section id="courses" class="mt-20 sm:mt-24 fade-section">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+          <div>
+            <p class="text-[11px] tracking-[0.26em] uppercase text-brandMuted">Structured Curriculum</p>
+            <h2 class="mt-1 text-2xl sm:text-3xl font-semibold tracking-tight text-white">
+              Signature Trading Programs
+            </h2>
+            <p class="mt-2 text-sm text-brandMuted max-w-xl">
+              From your first chart to advanced institutional concepts, learn through a clear, stepwise
+              curriculum aligned with live markets.
+            </p>
+          </div>
+          <a href="#contact"
+            class="inline-flex items-center justify-center rounded-full border border-white/30 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-brandGray hover:bg-white hover:text-black transition-colors">
+            Request Syllabus
+          </a>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <!-- Course Card 1 -->
+          <article
+            class="group rounded-2xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between hover:-translate-y-1.5 hover:border-white/40 hover:bg-white/5 transition transform-gpu">
+            <div class="space-y-3">
+              <div
+                class="h-9 w-9 rounded-full border border-white/30 flex items-center justify-center text-[11px] text-brandGray">
+                B
+              </div>
+              <h3 class="text-sm font-semibold text-white">Beginner Trading Course</h3>
+              <p class="text-xs text-brandMuted">
+                Understand market structure, candlesticks, order types and the foundations of disciplined
+                execution.
+              </p>
+            </div>
+            <button
+              class="mt-4 inline-flex items-center justify-center rounded-full border border-white/25 px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-brandGray group-hover:bg-white group-hover:text-black transition-colors">
+              Enroll Now
+            </button>
+          </article>
+
+          <!-- Course Card 2 -->
+          <article
+            class="group rounded-2xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between hover:-translate-y-1.5 hover:border-white/40 hover:bg-white/5 transition transform-gpu">
+            <div class="space-y-3">
+              <div
+                class="h-9 w-9 rounded-full border border-white/30 flex items-center justify-center text-[11px] text-brandGray">
+                TA
+              </div>
+              <h3 class="text-sm font-semibold text-white">Advanced Technical Analysis</h3>
+              <p class="text-xs text-brandMuted">
+                Multi-timeframe analysis, confluence, momentum, and advanced pattern recognition for high
+                conviction setups.
+              </p>
+            </div>
+            <button
+              class="mt-4 inline-flex items-center justify-center rounded-full border border-white/25 px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-brandGray group-hover:bg-white group-hover:text-black transition-colors">
+              Enroll Now
+            </button>
+          </article>
+
+          <!-- Course Card 3 -->
+          <article
+            class="group rounded-2xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between hover:-translate-y-1.5 hover:border-white/40 hover:bg-white/5 transition transform-gpu">
+            <div class="space-y-3">
+              <div
+                class="h-9 w-9 rounded-full border border-white/30 flex items-center justify-center text-[11px] text-brandGray">
+                PA
+              </div>
+              <h3 class="text-sm font-semibold text-white">Price Action Mastery</h3>
+              <p class="text-xs text-brandMuted">
+                Pure price action trading with liquidity zones, structure shifts, and institutional-style
+                execution.
+              </p>
+            </div>
+            <button
+              class="mt-4 inline-flex items-center justify-center rounded-full border border-white/25 px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-brandGray group-hover:bg-white group-hover:text-black transition-colors">
+              Enroll Now
+            </button>
+          </article>
+
+          <!-- Course Card 4 -->
+          <article
+            class="group rounded-2xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between hover:-translate-y-1.5 hover:border-white/40 hover:bg-white/5 transition transform-gpu">
+            <div class="space-y-3">
+              <div
+                class="h-9 w-9 rounded-full border border-white/30 flex items-center justify-center text-[11px] text-brandGray">
+                C&F
+              </div>
+              <h3 class="text-sm font-semibold text-white">Crypto & Forex Trading</h3>
+              <p class="text-xs text-brandMuted">
+                Learn to navigate 24/7 markets with volatility frameworks, session behavior, and risk
+                management.
+              </p>
+            </div>
+            <button
+              class="mt-4 inline-flex items-center justify-center rounded-full border border-white/25 px-3 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-brandGray group-hover:bg-white group-hover:text-black transition-colors">
+              Enroll Now
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <!-- Benefits Section -->
+      <section id="benefits" class="mt-20 sm:mt-24 fade-section">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+          <div>
+            <p class="text-[11px] tracking-[0.26em] uppercase text-brandMuted">Why Provoke Traders</p>
+            <h2 class="mt-1 text-2xl sm:text-3xl font-semibold tracking-tight text-white">
+              Built Around Real Traders
+            </h2>
+            <p class="mt-2 text-sm text-brandMuted max-w-xl">
+              Not just theory. Learn from traders actively navigating the markets with risk-aware,
+              repeatable processes.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-3">
+          <!-- Benefit cards -->
+          <div
+            class="rounded-2xl border border-white/15 bg-black/60 p-5 hover:-translate-y-1.5 hover:border-white/50 hover:bg-white/5 transition transform-gpu">
+            <div class="flex items-center gap-3">
+              <div
+                class="h-8 w-8 rounded-full border border-white/40 flex items-center justify-center text-[11px] text-brandGray">
+                01
+              </div>
+              <p class="font-medium text-brandGray text-sm">Professional Trading Strategies</p>
+            </div>
+            <p class="mt-3 text-xs text-brandMuted">
+              Institutional-style frameworks with clear rules, not signal chasing or guesswork.
+            </p>
+          </div>
+
+          <div
+            class="rounded-2xl border border-white/15 bg-black/60 p-5 hover:-translate-y-1.5 hover:border-white/50 hover:bg-white/5 transition transform-gpu">
+            <div class="flex items-center gap-3">
+              <div
+                class="h-8 w-8 rounded-full border border-white/40 flex items-center justify-center text-[11px] text-brandGray">
+                02
+              </div>
+              <p class="font-medium text-brandGray text-sm">Live Market Sessions</p>
+            </div>
+            <p class="mt-3 text-xs text-brandMuted">
+              Apply concepts in real-time with mentors sharing context, entries, and trade management.
+            </p>
+          </div>
+
+          <div
+            class="rounded-2xl border border-white/15 bg-black/60 p-5 hover:-translate-y-1.5 hover:border-white/50 hover:bg-white/5 transition transform-gpu">
+            <div class="flex items-center gap-3">
+              <div
+                class="h-8 w-8 rounded-full border border-white/40 flex items-center justify-center text-[11px] text-brandGray">
+                03
+              </div>
+              <p class="font-medium text-brandGray text-sm">Beginner to Advanced Learning</p>
+            </div>
+            <p class="mt-3 text-xs text-brandMuted">
+              A clear path from your first chart to advanced strategy implementation and journaling.
+            </p>
+          </div>
+
+          <div
+            class="rounded-2xl border border-white/15 bg-black/60 p-5 hover:-translate-y-1.5 hover:border-white/50 hover:bg-white/5 transition transform-gpu">
+            <div class="flex items-center gap-3">
+              <div
+                class="h-8 w-8 rounded-full border border-white/40 flex items-center justify-center text-[11px] text-brandGray">
+                04
+              </div>
+              <p class="font-medium text-brandGray text-sm">Risk Management Techniques</p>
+            </div>
+            <p class="mt-3 text-xs text-brandMuted">
+              Position sizing, risk caps, drawdown controls and frameworks designed to protect capital.
+            </p>
+          </div>
+
+          <div
+            class="rounded-2xl border border-white/15 bg-black/60 p-5 hover:-translate-y-1.5 hover:border-white/50 hover:bg-white/5 transition transform-gpu">
+            <div class="flex items-center gap-3">
+              <div
+                class="h-8 w-8 rounded-full border border-white/40 flex items-center justify-center text-[11px] text-brandGray">
+                05
+              </div>
+              <p class="font-medium text-brandGray text-sm">Personal Mentorship</p>
+            </div>
+            <p class="mt-3 text-xs text-brandMuted">
+              Direct guidance, feedback on trades and accountability from experienced traders.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Student Success Section -->
+      <section id="success" class="mt-20 sm:mt-24 fade-section">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+          <div>
+            <p class="text-[11px] tracking-[0.26em] uppercase text-brandMuted">Student Success</p>
+            <h2 class="mt-1 text-2xl sm:text-3xl font-semibold tracking-tight text-white">
+              Real Traders. Real Progress.
+            </h2>
+            <p class="mt-2 text-sm text-brandMuted max-w-xl">
+              Hear from traders who applied the Provoke Traders frameworks to their own journeys.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <!-- Testimonial 1 -->
+          <article
+            class="rounded-2xl border border-white/15 bg-black/60 p-5 flex flex-col justify-between hover:-translate-y-1.5 hover:border-white/50 hover:bg-white/5 transition transform-gpu">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <p class="text-sm font-semibold text-white">Aarav S.</p>
+                <div class="flex gap-0.5">
+                  <!-- 5 stars -->
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                </div>
+              </div>
+              <p class="text-xs text-brandMuted leading-relaxed">
+                "I stopped overtrading and finally built a consistent process. The focus on risk
+                management completely changed how I look at markets."
+              </p>
+            </div>
+            <p class="mt-4 text-[10px] text-brandMuted uppercase tracking-[0.16em]">Intraday & Swing Trader</p>
+          </article>
+
+          <!-- Testimonial 2 -->
+          <article
+            class="rounded-2xl border border-white/15 bg-black/60 p-5 flex flex-col justify-between hover:-translate-y-1.5 hover:border-white/50 hover:bg-white/5 transition transform-gpu">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <p class="text-sm font-semibold text-white">Neha K.</p>
+                <div class="flex gap-0.5">
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                </div>
+              </div>
+              <p class="text-xs text-brandMuted leading-relaxed">
+                "The live market sessions bridged the gap between theory and execution. I now know exactly
+                what I am looking for before entering a trade."
+              </p>
+            </div>
+            <p class="mt-4 text-[10px] text-brandMuted uppercase tracking-[0.16em]">Options & Index Trader</p>
+          </article>
+
+          <!-- Testimonial 3 -->
+          <article
+            class="rounded-2xl border border-white/15 bg-black/60 p-5 flex flex-col justify-between hover:-translate-y-1.5 hover:border-white/50 hover:bg-white/5 transition transform-gpu">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <p class="text-sm font-semibold text-white">Rahul M.</p>
+                <div class="flex gap-0.5">
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                  <span class="text-xs text-amber-300">★</span>
+                </div>
+              </div>
+              <p class="text-xs text-brandMuted leading-relaxed">
+                "The mentorship helped me unlearn bad habits and rebuild my trading plan from the ground
+                up with clear rules and journaling."
+              </p>
+            </div>
+            <p class="mt-4 text-[10px] text-brandMuted uppercase tracking-[0.16em]">Crypto & Forex Trader</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="mt-20 sm:mt-24 fade-section">
+        <div
+          class="rounded-3xl border border-white/15 bg-black/70 p-6 sm:p-8 lg:p-10 grid md:grid-cols-[1.3fr_minmax(0,1fr)] gap-8 lg:gap-12">
+          <div class="space-y-4">
+            <p class="text-[11px] tracking-[0.26em] uppercase text-brandMuted">Contact</p>
+            <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-white">
+              Speak with the Provoke Traders team
+            </h2>
+            <p class="text-sm text-brandMuted max-w-xl">
+              Reach out to confirm upcoming batches, discuss your current level, and design a learning
+              plan aligned with your trading goals.
+            </p>
+
+            <div class="mt-4 space-y-4 text-sm text-brandGray">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                  <p class="text-[11px] uppercase tracking-[0.2em] text-brandMuted">Institute</p>
+                  <p class="mt-1 text-sm text-white">Provoke Traders</p>
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <p class="text-[11px] uppercase tracking-[0.2em] text-brandMuted">Phone</p>
+                  <p class="mt-1 text-sm text-brandGray">+91 9876543210</p>
+                </div>
+                <div>
+                  <p class="text-[11px] uppercase tracking-[0.2em] text-brandMuted">Email</p>
+                  <a href="mailto:provoketraders@email.com"
+                    class="mt-1 block text-sm text-brandGray hover:text-white transition-colors">
+                    provoketraders@email.com
+                  </a>
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <p class="text-[11px] uppercase tracking-[0.2em] text-brandMuted">Instagram</p>
+                  <a href="https://instagram.com/provoke_traders" target="_blank" rel="noreferrer"
+                    class="mt-1 block text-sm text-brandGray hover:text-white transition-colors">
+                    @provoke_traders
+                  </a>
+                </div>
+                <div>
+                  <p class="text-[11px] uppercase tracking-[0.2em] text-brandMuted">YouTube</p>
+                  <a href="https://youtube.com/@provoke_traders" target="_blank" rel="noreferrer"
+                    class="mt-1 block text-sm text-brandGray hover:text-white transition-colors">
+                    @provoke_traders
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simple callback card -->
+          <div
+            class="rounded-2xl border border-white/15 bg-black/60 p-5 flex flex-col justify-between gap-4 text-sm text-brandMuted">
+            <div>
+              <p class="text-[11px] uppercase tracking-[0.2em] text-brandMuted">Next step</p>
+              <p class="mt-2 text-sm text-brandGray">
+                Send us a short note about your experience level and we’ll guide you to the right
+                starting point.
+              </p>
+            </div>
+            <ul class="space-y-2 text-xs">
+              <li>• Share your trading background and goals.</li>
+              <li>• Receive course and batch recommendations.</li>
+              <li>• Get details on fees, duration, and format.</li>
+            </ul>
+            <a href="mailto:provoketraders@email.com"
+              class="mt-2 inline-flex items-center justify-center rounded-full border border-white/30 bg-white/5 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-brandGray hover:bg-white hover:text-black transition-colors">
+              Email Us to Enroll
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 border-t border-white/10 bg-black/80">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="h-9 w-9 rounded-full overflow-hidden border border-white/40 bg-white shadow-md shadow-black/50 flex items-center justify-center">
+            <img src="images/provoke-traders-logo.png.jpg" alt="Provoke Traders Logo" class="h-full w-full object-cover" />
+          </div>
+          <div>
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase text-brandGray">Provoke Traders</p>
+            <p class="text-[10px] text-brandMuted tracking-[0.18em] uppercase">Create · Invest · Generate</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-5 text-[11px] text-brandMuted">
+          <nav class="flex gap-4">
+            <a href="#hero" class="hover:text-white transition-colors">Home</a>
+            <a href="#courses" class="hover:text-white transition-colors">Courses</a>
+            <a href="#benefits" class="hover:text-white transition-colors">Benefits</a>
+            <a href="#success" class="hover:text-white transition-colors">Success</a>
+          </nav>
+          <div class="flex items-center gap-3">
+            <a href="https://instagram.com/provoke_traders" target="_blank" rel="noreferrer"
+              class="h-7 w-7 rounded-full border border-white/25 flex items-center justify-center text-[11px] hover:bg-white hover:text-black transition-colors">
+              IG
+            </a>
+            <a href="https://youtube.com/@provoke_traders" target="_blank" rel="noreferrer"
+              class="h-7 w-7 rounded-full border border-white/25 flex items-center justify-center text-[11px] hover:bg-white hover:text-black transition-colors">
+              YT
+            </a>
+          </div>
+        </div>
+
+        <p class="text-[10px] text-brandMuted text-center sm:text-right w-full sm:w-auto">
+          © <span id="year"></span> Provoke Traders. Educational content only. Trading involves risk.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIconOpen = document.getElementById('menuIconOpen');
+    const menuIconClose = document.getElementById('menuIconClose');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        menuIconOpen.classList.toggle('hidden', !isOpen);
+        menuIconClose.classList.toggle('hidden', isOpen);
+      });
+
+      // Close mobile menu on navigation click
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuIconOpen.classList.remove('hidden');
+          menuIconClose.classList.add('hidden');
+        });
+      });
+    }
+
+    // Fade-in sections on scroll
+    const fadeSections = document.querySelectorAll('.fade-section');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.18 }
+    );
+
+    fadeSections.forEach(section => observer.observe(section));
+
+    // Simple parallax for background
+    const parallaxBg = document.getElementById('parallaxBg');
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY * -0.12;
+      parallaxBg.style.transform = `translateY(${offset}px)`;
+    });
+
+    // Set current year
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+
+</html>
+
